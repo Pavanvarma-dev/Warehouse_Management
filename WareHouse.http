@@ -48,12 +48,7 @@ content-length: 412
 date: Mon, 23 Nov 2026 10:27:21 GMT
 connection: close
 ###
-POST http://localhost:4004/warehouse/getExchangeRate
-Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
-Content-Type:application/json
-{
-"currency":"INR"
-}
+
 
 HTTP/1.1 200  - OK
 x-correlation-id: 22310569-dac0-4d1b-987a-9e6629615ade
@@ -62,4 +57,3 @@ content-type: application/json; charset=utf-8; ieee754compatible=true
 content-length: 127
 date: Tue, 24 Nov 2026 07:46:04 GMT
 connection: close
-###
