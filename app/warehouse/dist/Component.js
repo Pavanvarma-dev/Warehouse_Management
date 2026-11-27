@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/model/json/JSONModel"],function(e,t){"use strict";return e.extend("com.warehouse.warehouse.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.setModel(new t({selectedTab:"warehouses",status:"",dialogTitle:"",dialogType:"",form:{}}),"ui")}})});
+//# sourceMappingURL=Component.js.map

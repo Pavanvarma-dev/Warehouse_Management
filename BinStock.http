@@ -1,0 +1,30 @@
+POST http://localhost:4004/warehouse/BinStocks
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+Content-Type: application/json
+
+{
+  "bin_ID": "1aa60910-22a6-48f9-8b01-a277796aff42",
+  "product_ID": "9293a077-a44a-4a4b-ab02-e86459096b3a",
+  "quantity": 900
+}
+
+HTTP/1.1 201  - Created
+x-correlation-id: af970385-29ca-48eb-82ba-739806a1d763
+odata-version: 4.0
+sap-messages: [{"code":"","message":"Created bin stock for product 9293a077-a44a-4a4b-ab02-e86459096b3a in bin 1aa60910-22a6-48f9-8b01-a277796aff42. Quantity: 900","numericSeverity":2}]
+location: undefined
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 229
+date: Wed, 18 Nov 2026 09:08:58 GMT
+connection: close
+###
+GET http://localhost:4004/warehouse/BinStocks
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+
+HTTP/1.1 200  - OK
+x-correlation-id: d595cecd-d397-46fd-98b7-f11c8fbb68e4
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 1173
+date: Mon, 23 Nov 2026 11:02:14 GMT
+connection: close

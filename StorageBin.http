@@ -1,0 +1,28 @@
+POST http://localhost:4004/warehouse/StorageBins
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+Content-Type: application/json
+
+{
+  "binCode": "SB-003",
+  "aisel": "A3",
+  "maxCapacity": 10000,
+  "warehouse_ID":"d435bbe6-6dbc-4705-836e-d01767981816"
+}
+
+HTTP/1.1 204  - No Content
+x-correlation-id: f13c90b0-0a38-44e1-899d-841ef5b152da
+odata-version: 4.0
+location: StorageBins(a97aafb1-44bf-4e8b-817f-e2572b666efc)
+date: Wed, 18 Nov 2026 06:19:35 GMT
+connection: close
+###
+GET http://localhost:4004/warehouse/StorageBins?$expand=warehouse
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+
+HTTP/1.1 200  - OK
+x-correlation-id: 0992b001-c4f2-4dd5-ba02-5653e13de115
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 1600
+date: Thu, 19 Nov 2026 09:22:01 GMT
+connection: close

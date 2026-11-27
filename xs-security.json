@@ -1,0 +1,60 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.warehouse_operator",
+      "description": "warehouse_operator"
+    },
+    {
+      "name": "$XSAPPNAME.warehouse_manager",
+      "description": "warehouse_manager"
+    },
+    {
+      "name": "$XSAPPNAME.admin",
+      "description": "admin"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "warehouse_operator",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.warehouse_operator"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "warehouse_manager",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.warehouse_manager"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "admin",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.admin"
+      ],
+      "attribute-references": []
+    }
+  ],
+  "role-collection":[
+    {
+       "name": "warehouse_manager",
+      "description": "generated",
+      "role-template-references": ["$XSAPPNAME.warehouse_manager"]
+    },
+    {
+       "name": "warehouse_operator",
+      "description": "generated",
+      "role-template-references": ["$XSAPPNAME.warehouse_operator"]
+    },
+    {
+       "name": "admin",
+      "description": "generated",
+      "role-template-references": ["$XSAPPNAME.admin"] 
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+POST http://localhost:4004/warehouse/Warehouse
+Authorization: Basic bWFuYWdlcjptYW5hZ2Vy
+Content-Type: application/json
+
+{
+  "code": "CW005",
+  "name": "Nellore Warehouse",
+  "Location": "091 Gandhi Street, Nellore, AP"
+}
+
+HTTP/1.1 204  - No Content
+x-correlation-id: 5c283eab-0fe1-4355-af1b-1e858cdd0856
+odata-version: 4.0
+location: Warehouse(02a95deb-dc59-44a1-8c33-93fd0ac02cdf)
+date: Mon, 23 Nov 2026 11:03:10 GMT
+connection: close
+###
+GET http://localhost:4004/warehouse/Warehouse
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+
+HTTP/1.1 200  - OK
+x-correlation-id: 42fa056f-032d-4e3a-a62a-1781d5674b7e
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 518
+date: Mon, 23 Nov 2026 11:03:15 GMT
+connection: close
+###
+GET  http://localhost:4004/warehouse/Warehouse?$expand=bins
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+
+HTTP/1.1 200  - OK
+x-correlation-id: ae7ff6e4-6ef4-432e-892a-f5473ba9dadb
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 727
+date: Mon, 23 Nov 2026 10:26:31 GMT
+connection: close
+###
+GET  http://localhost:4004/warehouse/LowStockAlert
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+
+HTTP/1.1 200  - OK
+x-correlation-id: 897e7de6-5085-4142-bd06-b59f2afba578
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 412
+date: Mon, 23 Nov 2026 10:27:21 GMT
+connection: close
+###
+POST http://localhost:4004/warehouse/getExchangeRate
+Authorization: Basic b3BlcmF0b3JBOm9wZXJhdG9yQQ==
+Content-Type:application/json
+{
+"currency":"INR"
+}
+
+HTTP/1.1 200  - OK
+x-correlation-id: 22310569-dac0-4d1b-987a-9e6629615ade
+odata-version: 4.0
+content-type: application/json; charset=utf-8; ieee754compatible=true
+content-length: 127
+date: Tue, 24 Nov 2026 07:46:04 GMT
+connection: close
+###

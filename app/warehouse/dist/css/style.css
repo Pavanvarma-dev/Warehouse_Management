@@ -1,0 +1,44 @@
+.warehousePage .sapMPageSubHeader {
+    box-shadow: none;
+}
+
+.warehousePage .sapMITB {
+    background: transparent;
+}
+
+.warehousePage .sapMListTbl {
+    border-radius: 0.5rem;
+}
+
+.warehousePage .sapMMsgStrip {
+    margin: 0.75rem 1rem 0;
+    width: auto;
+}
+
+.warehousePage .sapMDialog .sapMLabel {
+    margin-top: 0.5rem;
+}
+.lowStockMessage {
+    border-radius: 8px;
+    margin: 8px 8px;
+    font-weight: 600;
+}
+
+.lowStockPanel,
+.lowStockPanel > section,
+.lowStockPanel .sapMPanelContent {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lowStockAlertItem {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+}
+
+.lowStockMessageStrip {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 0.75rem;
+}

@@ -1,0 +1,354 @@
+<mvc:View
+    controllerName="com.warehouse.warehouse.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <App>
+        <Page title="Warehouse Management" class="warehousePage">
+            <subHeader>
+                <Toolbar>
+                    <Title text="Inventory operations" level="H2" />
+                    <ToolbarSpacer />
+                    <Button
+                        icon="sap-icon://synchronize"
+                        tooltip="Refresh data"
+                        press=".onRefresh" />
+                </Toolbar>
+            </subHeader>
+            <content>
+                <MessageStrip
+                    text="{ui>/status}"
+                    type="Success"
+                    showIcon="true"
+                    visible="{= ${ui>/status} !== '' }" />
+
+
+<Panel
+    id="lowStockPanel"
+    headerText="Low Stock Alerts"
+    expandable="false"
+    class="sapUiResponsiveMargin lowStockPanel">
+
+    <content>
+        <VBox width="100%">
+
+            <!-- Alert toolbar -->
+            <Toolbar>
+                <Title
+                    text="Inventory Notifications"
+                    level="H5" />
+
+                <ToolbarSpacer />
+
+                <Button
+                    text="Clear All"
+                    icon="sap-icon://delete"
+                    type="Reject"
+                    press=".onClearLowStockAlerts" />
+            </Toolbar>
+
+            <!-- Alerts list -->
+            <List
+                id="lowStockAlerts"
+                items="{/LowStockAlert}"
+                noDataText="No low-stock alerts. All stock levels are healthy."
+                showSeparators="None">
+
+                <CustomListItem>
+                    <VBox
+                        class="lowStockAlertItem">
+
+                        <MessageStrip
+                            text="{message}"
+                            type="Error"
+                            showIcon="true"
+                            showCloseButton="false"
+                            class="lowStockMessageStrip" />
+
+                        <HBox
+                            width="100%"
+                            justifyContent="SpaceBetween"
+                            alignItems="Center">
+
+                            <Text
+                                text="Quantity: {quantity}" />
+
+                            <ObjectStatus
+                                text="Inventory Warning"
+                                state="Error" />
+
+                        </HBox>
+
+                    </VBox>
+                </CustomListItem>
+
+            </List>
+
+        </VBox>
+    </content>
+
+</Panel>
+
+
+                <IconTabBar
+                    id="dataTabs"
+                    class="sapUiResponsiveContentPadding"
+                    expandable="false"
+                    selectedKey="{ui>/selectedTab}"
+                    select=".onTabSelect">
+                    <items>
+                        <IconTabFilter
+                            key="warehouses"
+                            text="Warehouses"
+                            icon="sap-icon://building">
+                            <content>
+                                <Table id="warehousesTable" items="{/Warehouse}" growing="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Warehouses" level="H3" />
+                                            <ToolbarSpacer />
+                                            <SearchField
+                                                width="18rem"
+                                                placeholder="Search warehouses"
+                                                liveChange=".onSearch" />
+                                            <Button
+                                                text="Add Warehouse"
+                                                icon="sap-icon://add"
+                                                type="Emphasized"
+                                                press=".onAddWarehouse" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column><Text text="Name" /></Column>
+                                        <Column><Text text="Code" /></Column>
+                                        <Column><Text text="Location" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="{name}" />
+                                                <ObjectIdentifier title="{code}" />
+                                                <Text text="{Location}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </content>
+                        </IconTabFilter>
+                        <IconTabFilter
+                            key="bins"
+                            text="Storage Bins"
+                            icon="sap-icon://shipping-status">
+                            <content>
+                                <Table id="binsTable" items="{/StorageBins}" growing="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Storage Bins" level="H3" />
+                                            <ToolbarSpacer />
+                                            <SearchField
+                                                width="18rem"
+                                                placeholder="Search storage bins"
+                                                liveChange=".onSearch" />
+                                            <Button
+                                                text="Add Bin"
+                                                icon="sap-icon://add"
+                                                type="Emphasized"
+                                                press=".onAddBin" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column><Text text="Bin Code" /></Column>
+                                        <Column><Text text="Aisle" /></Column>
+                                        
+                                        <Column><Text text="Max Capacity" /></Column>
+                                           <Column><Text text="Remaining Capacity" /></Column>
+                                        <Column><Text text="Warehouse" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <ObjectIdentifier title="{binCode}" />
+                                                <Text text="{aisel}" />
+                                                <ObjectNumber number="{maxCapacity}" />
+                                                <ObjectNumber number="{remainingCapacity}" />
+                                                <Text text="{warehouse/name}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </content>
+                        </IconTabFilter>
+                        <IconTabFilter
+                            key="products"
+                            text="Products"
+                            icon="sap-icon://product">
+                            <content>
+                                <Table id="productsTable" items="{/Products}" growing="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Products" level="H3" />
+                                            <ToolbarSpacer />
+                                            <SearchField
+                                                width="18rem"
+                                                placeholder="Search products"
+                                                liveChange=".onSearch" />
+                                            <Button
+                                                text="Add Product"
+                                                icon="sap-icon://add"
+                                                type="Emphasized"
+                                                press=".onAddProduct" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column><Text text="SKU" /></Column>
+                                        <Column><Text text="Product" /></Column>
+                                        <Column><Text text="Category" /></Column>
+                                        <Column hAlign="End"><Text text="Unit Price" /></Column>
+                                        <Column><Text text="Unit" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <ObjectIdentifier title="{sku}" />
+                                                <Text text="{name}" />
+                                                <Text text="{category}" />
+                                                <ObjectNumber number="{unitPrice}" />
+                                                <Text text="{unitOfMeasure}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </content>
+                        </IconTabFilter>
+                        <IconTabFilter
+                            key="stock"
+                            text="Stock"
+                            icon="sap-icon://inventory">
+                            <content>
+                                <Table
+                                    id="stockTable"
+                                    items="{path: '/BinStocks', parameters: {$expand: 'bin,product'}}"
+                                    growing="true">
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <Title text="Stock by Bin" level="H3" />
+                                            <ToolbarSpacer />
+                                            <SearchField
+                                                width="18rem"
+                                                placeholder="Search stock"
+                                                liveChange=".onSearch" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column><Text text="Product" /></Column>
+                                        <Column><Text text="SKU" /></Column>
+                                        <Column><Text text="Bin" /></Column>
+                                        <Column><Text text="Warehouse" /></Column>
+                                        <Column hAlign="End"><Text text="Quantity" /></Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="{product/name}" />
+                                                <Text text="{product/sku}" />
+                                                <Text text="{bin/binCode}" />
+                                                 <Text text="{bin/warehouse/name}" />
+                                                <ObjectNumber number="{quantity}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </content>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </content>
+            <footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+                    <Button
+                        text="Receive Stock"
+                        icon="sap-icon://inbox"
+                        press=".onReceiveStock" />
+                    <Button
+                        text="Dispatch Stock"
+                        icon="sap-icon://outbox"
+                        type="Emphasized"
+                        press=".onDispatchStock" />
+                </OverflowToolbar>
+            </footer>
+            <dependents>
+                <Dialog
+                    id="editDialog"
+                    title="{ui>/dialogTitle}"
+                    contentWidth="28rem"
+                    draggable="true"
+                    resizable="true">
+                    <content>
+                        <VBox class="sapUiSmallMargin">
+                            <VBox visible="{= ${ui>/dialogType} === 'warehouse' }">
+                                <Label text="Name" required="true" />
+                                <Input value="{ui>/form/name}" />
+                                <Label text="Code" required="true" />
+                                <Input value="{ui>/form/code}" />
+                                <Label text="Location" required="true" />
+                                <Input value="{ui>/form/Location}" />
+                            </VBox>
+                            <VBox visible="{= ${ui>/dialogType} === 'bin' }">
+                                <Label text="Bin Code" required="true" />
+                                <Input value="{ui>/form/binCode}" />
+                                <Label text="Aisle" required="true" />
+                                <Input value="{ui>/form/aisel}" />
+                                <Label text="Maximum Capacity" required="true" />
+                                <Input value="{ui>/form/maxCapacity}" type="Number" />
+                                <Label text="Warehouse" required="true" />
+                                <Select
+                                    width="100%"
+                                    selectedKey="{ui>/form/warehouse_ID}"
+                                    items="{/Warehouse}">
+                                    <core:Item key="{ID}" text="{name}" />
+                                </Select>
+                            </VBox>
+                            <VBox visible="{= ${ui>/dialogType} === 'product' }">
+                                <Label text="SKU" required="true" />
+                                <Input value="{ui>/form/sku}" />
+                                <Label text="Name" required="true" />
+                                <Input value="{ui>/form/name}" />
+                                <Label text="Category" required="true" />
+                                <Input value="{ui>/form/category}" />
+                                <Label text="Unit Price" required="true" />
+                                <Input value="{ui>/form/unitPrice}" type="Number" />
+                                <Label text="Unit of Measure" required="true" />
+                                <Input value="{ui>/form/unitOfMeasure}" />
+                            </VBox>
+                            <VBox visible="{= ${ui>/dialogType} === 'receive' || ${ui>/dialogType} === 'dispatch' }">
+                                <Label text="Product" required="true" />
+                                <Select
+                                    width="100%"
+                                    selectedKey="{ui>/form/productId}"
+                                    items="{/Products}">
+                                    <core:Item key="{ID}" text="{name}" />
+                                </Select>
+                                <Label text="Storage Bin" required="true" />
+                                <Select
+                                    width="100%"
+                                    selectedKey="{ui>/form/binId}"
+                                    items="{/StorageBins}">
+                                    <core:Item key="{ID}" text="{binCode}" />
+                                </Select>
+                                <Label text="Quantity" required="true" />
+                                <Input value="{ui>/form/quantity}" type="Number" />
+                            </VBox>
+                        </VBox>
+                    </content>
+                    <beginButton>
+                        <Button text="Save" type="Emphasized" press=".onSaveDialog" />
+                    </beginButton>
+                    <endButton>
+                        <Button text="Cancel" press=".onCancelDialog" />
+                    </endButton>
+                </Dialog>
+            </dependents>
+        </Page>
+    </App>
+</mvc:View>

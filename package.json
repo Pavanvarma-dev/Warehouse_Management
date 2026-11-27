@@ -1,0 +1,81 @@
+{
+  "name": "warehouse-management",
+  "version": "1.0.0",
+  "description": "Welcome to your new CAP project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-warehouse": "cds watch --open com.warehouse.warehouse/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@cap-js/sqlite": "^3.1.3",
+    "@sap/cds-dk": "^10",
+    "cds-plugin-ui5": "^0.17.0"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "sqlite.db"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "admin": {
+            "password": "admin",
+            "roles": [
+              "admin"
+            ]
+          },
+          "manager": {
+            "password": "manager",
+            "roles": [
+              "warehouse_manager"
+            ]
+          },
+          "operatorA": {
+            "password": "operatorA",
+            "roles": [
+              "warehouse_operator"
+            ],
+            "attr": {
+              "Warehouse_ID": "3b8b59ef-147e-455c-9e65-3dc64a4fa386"
+            }
+          },
+          "operatorB": {
+            "password": "operatorB",
+            "roles": [
+              "warehouse_operator"
+            ],
+            "attr": {
+              "Warehouse_ID": "YOUR-SECOND-WAREHOUSE-UUID"
+            }
+          },
+          "*": false
+        }
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@sap/cds": "^10.2.2",
+    "@sap/xssec": "^4"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/warehouse"
+  ]
+}
